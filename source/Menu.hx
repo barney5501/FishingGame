@@ -11,6 +11,8 @@ class Menu extends FlxState
 
 	override function create()
 	{
+		if(FlxG.sound.music!=null)
+			FlxG.sound.music.stop();
 		background = new FlxSprite(0, 0, AssetPaths.rekacopy__jpg);
 		title = new FlxSprite(50, 50, AssetPaths.PARGIT__png);
 		play = new FlxButton(FlxG.width / 8, 3 * FlxG.height / 4, null, startGame);

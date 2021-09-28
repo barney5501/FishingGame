@@ -16,15 +16,15 @@ class Shark extends FlxSprite
 		loadGraphic(AssetPaths.PTshark__png);
 		oHeight = height;
 		oWidth = width;
-		setPosition(1920 + width, Std.random(500) + 500);
-		setSize(oWidth / 3, oHeight / 2);
-		offset.y = oHeight / 2;
+		setPosition(1920 + oWidth, Std.random(500) + 500);
+		setSize(oWidth / 3, oHeight/3);
+		offset.y = oHeight/3;
 		if (dir == 1)
 		{
 			SPEED = -(Std.random(150) + 200);
-			setPosition(-(1920 + width), Std.random(500) + 500);
-			facing = LEFT;
+			setPosition(-width, Std.random(500) + 500);
 			flipX = true;
+			offset.x = oWidth-(oWidth/3);
 		}
 	}
 

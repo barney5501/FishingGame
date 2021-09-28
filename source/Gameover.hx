@@ -1,3 +1,4 @@
+import flixel.ui.FlxSpriteButton;
 import flixel.FlxG;
 import flixel.FlxSprite;
 import flixel.FlxState;
@@ -9,20 +10,40 @@ import flixel.util.FlxColor;
 class Gameover extends FlxState
 {
 	var background:FlxSprite;
+	var scoreint:Int;
 	var score:FlxText;
-	var text:FlxText;
-	var back:FlxButton;
+	var back:FlxSpriteButton;
 
-	public function new()
+	override function create() 
 	{
-		super();
+		FlxG.mouse.visible = true;
+		if(FlxG.sound.music!=null){
+			FlxG.sound.music.stop();
+			FlxG.sound.music = null;
+		}
+		scoreint = PlayState.score;
 		background = new FlxSprite();
-		score = new FlxText();
-		text = new FlxText();
-		back = new FlxButton();
-		back.loadGraphic(AssetPaths.BTfish__png);
-		add(back); // background.loadGraphic()
+		background.loadGraphic(AssetPaths.gameover__jpg);
+		
+		score = new FlxText(FlxG.width/5, 5*FlxG.height/8, 'SCORE: $scoreint');
+		back = new FlxSpriteButton(4*FlxG.width/9, 5*FlxG.height/8, null, goback);
+		
+		score.setGraphicSize(Std.int(FlxG.width/8), Std.int(FlxG.height/14.2));
+		score.updateHitbox();
+		back.setGraphicSize(Std.int(FlxG.width/6), Std.int(FlxG.height/10.6));
+		back.updateHitbox();
+		back.createTextLabel("Back", null, 26, FlxColor.WHITE);
+		back.label.setSize(Std.int(FlxG.width/6), Std.int(FlxG.height/10.6));
+		back.label.centerOffsets();
+		
+		add(background);
+		add(score);
+		add(back);
+		super.create();
 
-		// background.screenCenter();
+	}
+
+	function goback() {
+		FlxG.switchState(new Menu());
 	}
 }

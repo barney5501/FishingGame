@@ -1,5 +1,4 @@
 import flixel.FlxSprite;
-
 class Fish extends FlxSprite
 {
 	var SPEED:Int;
@@ -9,6 +8,8 @@ class Fish extends FlxSprite
 	public var dir:Int;
 
 	public var cought:Bool = false;
+	var oWidth:Float;
+	var oHeight:Float;
 
 	public function new(x:Float = 0, y:Float = 0)
 	{
@@ -17,18 +18,18 @@ class Fish extends FlxSprite
 		cought = false;
 		super(x, y);
 		loadGraphic(AssetPaths.BTfish__png);
-		setPosition(1920 + 64, Std.random(500) + 500);
-		drag.x = drag.y = 1600;
-		setSize(width / 4, height / 2.5);
+		oWidth = width;
+		oHeight = height;
+		setPosition(1920 + oWidth, Std.random(500) + 500);
+		setSize(oWidth / 4, oHeight / 2.5);
+		offset.y = oHeight / 2.5;
 		if (dir == 1)
 		{
 			SPEED = -(Std.random(150) + 200);
-			setPosition(-64, Std.random(500) + 500);
-			facing = LEFT;
+			setPosition(-oWidth, Std.random(500) + 500);
 			flipX = true;
-			setSize(width * 2, -(height * 2.5) / 1.5);
+			offset.x = oWidth-(oWidth/4);
 		}
-		velocity.y = 50;
 	}
 
 	function swim()
